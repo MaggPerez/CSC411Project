@@ -17,7 +17,7 @@
       </Label>
       <VBox alignment="CENTER" prefHeight="176.0" prefWidth="300.0" spacing="20.0">
          <children>
-            <TextField fx:id="usernameField" promptText="Enter username" />
+            <TextField fx:id="emailField" promptText="Enter username" />
             <PasswordField fx:id="passwordField" promptText="Enter password" />
             <Button mnemonicParsing="false" onAction="#login" text="Login" />
          </children>

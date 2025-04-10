@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/" fx:controller="bcs.csc411.csc411project.HelloController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="bcs.csc411.csc411project.HelloController">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
          <children>
@@ -17,7 +17,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameField" promptText="Create username" />
+            <TextField fx:id="emailField" promptText="Create username" />
             <PasswordField fx:id="passwordField" promptText="Create password" />
             <PasswordField fx:id="confirmPasswordField" promptText="Create password" />
             <Button mnemonicParsing="false" onAction="#createAccount" text="Sign up" />

@@ -8,8 +8,6 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 public class HelloController extends HelloApplication {
-    @FXML
-    private Label welcomeText;
 
     @FXML
     private TextField confirmPasswordField;
@@ -19,11 +17,11 @@ public class HelloController extends HelloApplication {
     private TextField passwordField;
 
     @FXML
-    private TextField usernameField;
+    private TextField emailField;
 
-//    public void initialize(){
-//        DBManager.createUserTable();
-//    }
+    public void initialize(){
+        DBManager.createUserTable();
+    }
 
 
     @FXML
@@ -48,10 +46,19 @@ public class HelloController extends HelloApplication {
 
     @FXML
     public void createAccount() throws IOException {
+//        String email = emailField.getText();
+//        String password = passwordField.getText();
+//        String confirmPassword = confirmPasswordField.getText();
+//        String salt = "";
+//
+//        User newUser = new User(email, salt, password);
+//        DBManager.addUser(newUser);
+
+
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        if(usernameField.getText().isEmpty() && passwordField.getText().isEmpty()){
+        if(emailField.getText().isEmpty() && passwordField.getText().isEmpty()){
             alert.setTitle("TextFields are empty");
-            alert.setContentText("Fill in username and password");
+            alert.setContentText("Fill in email and password");
             alert.show();
         }
         else if(!passwordField.getText().equals(confirmPasswordField.getText())){
@@ -60,8 +67,13 @@ public class HelloController extends HelloApplication {
             alert.show();
         }
         else{
-            userManager.getCurrentUser().setUsername(usernameField.getText());
-            userManager.getCurrentUser().setPassword(passwordField.getText());
+            String email = emailField.getText();
+            String password = passwordField.getText();
+            String confirmPassword = confirmPasswordField.getText();
+            String salt = "";
+
+            User newUser = new User(email, salt, password);
+//            DBManager.addUser(newUser);
             alert.setAlertType(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Success!");
             alert.setContentText("Account created!");
@@ -83,7 +95,7 @@ public class HelloController extends HelloApplication {
         }
 
         //Uses the static userManager to access user data
-        if(usernameField.getText().equals(userManager.getCurrentUser().getUsername()) &&
+        if(emailField.getText().equals(userManager.getCurrentUser().getUsername()) &&
                 passwordField.getText().equals(userManager.getCurrentUser().getPassword())){
             System.out.println("Login successful!");
             switchToMainMenu();
