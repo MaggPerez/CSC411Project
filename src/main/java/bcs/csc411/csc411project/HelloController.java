@@ -56,24 +56,27 @@ public class HelloController extends HelloApplication {
 
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
+        //Shows error alert if both fields are empty
         if(emailField.getText().isEmpty() && passwordField.getText().isEmpty()){
             alert.setTitle("TextFields are empty");
             alert.setContentText("Fill in email and password");
             alert.show();
         }
+        //Error alert if passwords are not the same
         else if(!passwordField.getText().equals(confirmPasswordField.getText())){
             alert.setTitle("Error!");
             alert.setContentText("Passwords are not the same.");
             alert.show();
         }
         else{
+            //adds user's account to DB
             String email = emailField.getText();
             String password = passwordField.getText();
             String confirmPassword = confirmPasswordField.getText();
             String salt = "";
 
             User newUser = new User(email, salt, password);
-//            DBManager.addUser(newUser);
+            DBManager.addUser(newUser);
             alert.setAlertType(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Success!");
             alert.setContentText("Account created!");
@@ -87,25 +90,40 @@ public class HelloController extends HelloApplication {
     @FXML
     public void login() throws IOException {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        if(userManager.getCurrentUser().getUsername().isEmpty()){
-            alert.setTitle("Login failed!");
-            alert.setContentText("User doesn't exist");
-            alert.show();
-            return;
-        }
+        String email = emailField.getText();
+        String enteredPassword = passwordField.getText();
 
-        //Uses the static userManager to access user data
-        if(emailField.getText().equals(userManager.getCurrentUser().getUsername()) &&
-                passwordField.getText().equals(userManager.getCurrentUser().getPassword())){
-            System.out.println("Login successful!");
+        boolean isAuthenticated = PasswordManager.authenticate(email, enteredPassword);
+        if(isAuthenticated){
+            System.out.println("Login successful");
             switchToMainMenu();
         }
         else{
-            System.out.println("Login failed!");
-
             alert.setTitle("Login Failed");
             alert.setContentText("Username or password is incorrect");
             alert.show();
         }
+
+
+//        if(userManager.getCurrentUser().getUsername().isEmpty()){
+//            alert.setTitle("Login failed!");
+//            alert.setContentText("User doesn't exist");
+//            alert.show();
+//            return;
+//        }
+//
+//        //Uses the static userManager to access user data
+//        if(emailField.getText().equals(userManager.getCurrentUser().getUsername()) &&
+//                passwordField.getText().equals(userManager.getCurrentUser().getPassword())){
+//            System.out.println("Login successful!");
+//            switchToMainMenu();
+//        }
+//        else{
+//            System.out.println("Login failed!");
+//
+//            alert.setTitle("Login Failed");
+//            alert.setContentText("Username or password is incorrect");
+//            alert.show();
+//        }
     }
 }

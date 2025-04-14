@@ -77,4 +77,45 @@ public class DBManager {
             System.out.println("Error");
         }
     }
+
+    public static String retrievePassword(String email){
+        String password = "";
+        String query = "SELECT * FROM users where email = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setString(1, email);
+
+                try(ResultSet result = stmt.executeQuery()) {
+                    if(result.next()){
+                        password = result.getString("password");
+                    }
+                }
+
+        } catch (SQLException e) {
+            System.out.println("Error");
+        }
+
+        return password;
+
+    }
+
+    public static String retrieveSalt(String email){
+        String salt = "";
+        String query = "SELECT * FROM users where email = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, email);
+
+            try(ResultSet result = stmt.executeQuery()) {
+                if(result.next()){
+                    salt = result.getString("salt");
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error");
+        }
+
+        return salt;
+    }
 }
