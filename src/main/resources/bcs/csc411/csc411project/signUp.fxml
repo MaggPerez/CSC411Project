@@ -5,27 +5,32 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="bcs.csc411.csc411project.HelloController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bcs.csc411.csc411project.SignUpController">
    <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+      <Label text="Sign up">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
          <children>
-            <Label text="Sign up">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="emailField" promptText="Create username" />
-            <PasswordField fx:id="passwordField" promptText="Create password" />
-            <PasswordField fx:id="confirmPasswordField" promptText="Create password" />
-            <Button mnemonicParsing="false" onAction="#createAccount" text="Sign up" />
+            <Label prefHeight="17.0" prefWidth="67.0" text="Create email" />
+            <TextField fx:id="emailField" prefHeight="25.0" prefWidth="209.0" promptText="Create email" />
+            <Label prefHeight="17.0" prefWidth="177.0" text="Create password" />
+            <PasswordField fx:id="passwordField" prefHeight="25.0" prefWidth="333.0" promptText="Create password" />
+            <Label text="Confirm password" />
+            <PasswordField fx:id="confirmPasswordField" promptText="Confirm password" />
+            <HBox prefHeight="100.0" prefWidth="200.0" />
          </children>
          <VBox.margin>
-            <Insets left="150.0" right="150.0" />
+            <Insets left="120.0" right="120.0" />
          </VBox.margin>
       </VBox>
+      <Button mnemonicParsing="false" onAction="#createAccount" text="Sign up" />
       <Button mnemonicParsing="false" onAction="#switchToHome" text="Go back" />
    </children>
 </VBox>

@@ -8,23 +8,25 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bcs.csc411.csc411project.HelloController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bcs.csc411.csc411project.LoginController">
    <children>
       <Label prefWidth="55.0" text="Sign in">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <VBox alignment="CENTER" prefHeight="176.0" prefWidth="300.0" spacing="20.0">
+      <VBox alignment="CENTER_LEFT" prefHeight="176.0" prefWidth="300.0" spacing="20.0">
          <children>
-            <TextField fx:id="emailField" promptText="Enter username" />
+            <Label text="Enter email" />
+            <TextField fx:id="emailField" promptText="Enter email" />
+            <Label text="Enter password" />
             <PasswordField fx:id="passwordField" promptText="Enter password" />
-            <Button mnemonicParsing="false" onAction="#login" text="Login" />
          </children>
          <VBox.margin>
             <Insets left="150.0" right="150.0" />
          </VBox.margin>
       </VBox>
+      <Button mnemonicParsing="false" onAction="#login" text="Login" />
       <Button mnemonicParsing="false" onAction="#switchToHome" text="Go back" />
    </children>
 </VBox>

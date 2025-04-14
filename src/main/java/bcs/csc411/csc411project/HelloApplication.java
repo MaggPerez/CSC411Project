@@ -11,8 +11,6 @@ public class HelloApplication extends Application {
     private static Stage primaryStage;
     public static Scene scene;
 
-    //UserManager to store user data
-    public static final UserManager userManager = new UserManager();
 
     public static Stage getPrimaryStage() {
         return primaryStage;
@@ -39,22 +37,5 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         launch();
-    }
-}
-
-//UserManager class to store user data
-class UserManager {
-    private User currentUser;
-
-    public UserManager() {
-        this.currentUser = new User();
-    }
-
-    public User getCurrentUser() {
-        return currentUser;
-    }
-
-    public void setCurrentUser(User user) {
-        this.currentUser = user;
     }
 }
