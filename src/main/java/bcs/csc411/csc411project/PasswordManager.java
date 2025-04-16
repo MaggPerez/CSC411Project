@@ -2,7 +2,11 @@ package bcs.csc411.csc411project;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Base64;
 
@@ -29,18 +33,29 @@ public class PasswordManager {
 
     public static String generatePasswordHash(String password, byte[] salt){
         byte[] passwordHash = null;
-//        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
-        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 512);
-//        passwordHash = factory.generateSecret(spec).getEncoded();
-        return null;
+        SecretKeyFactory factory = null;
+        try {
+            factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
+            KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 512);
+            passwordHash = factory.generateSecret(spec).getEncoded();
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            System.out.println("Exception when generating passwordhash");
+        }
+
+        return byteArrayToString(passwordHash);
     }
 
     public static boolean authenticate(String email, String enteredPassword) {
-        boolean authenticated = false;
-        String storedPassword = DBManager.retrievePassword(email);
 
-        authenticated = enteredPassword.equals(storedPassword);
+        String storedPasswordHash = DBManager.retrievePassword(email);
+        String strSalt = DBManager.retrieveSalt(email);
+        byte[] byteSalt = PasswordManager.stringToByteArray(strSalt);
+        String calculatedPasswordHash = PasswordManager.generatePasswordHash(enteredPassword, byteSalt);
 
-        return authenticated;
+        //compare storedPasswordHash with calculated passwordHash
+
+//        authenticated = calculatedPasswordHash.equals(storedPasswordHash);
+
+        return MessageDigest.isEqual(storedPasswordHash.getBytes(StandardCharsets.UTF_8), calculatedPasswordHash.getBytes(StandardCharsets.UTF_8));
     }
 }

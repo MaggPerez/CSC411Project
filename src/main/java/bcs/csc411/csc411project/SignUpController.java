@@ -44,7 +44,7 @@ public class SignUpController extends HelloApplication {
             alert.setContentText("Fill in email and password");
             alert.show();
         }
-        //Error alert if passwords are not the same
+        //Error alert if both password fields are not the same.
         else if(!passwordField.getText().equals(confirmPasswordField.getText())){
             alert.setTitle("Error!");
             alert.setContentText("Passwords are not the same.");
@@ -54,8 +54,17 @@ public class SignUpController extends HelloApplication {
             //adds user's account to DB
             String email = emailField.getText();
             String password = passwordField.getText();
-            String salt = "";
-            User newUser = new User(email, salt, password);
+            //Validation here (YOU WILL ADD THIS)
+
+            //generating salt
+            byte[] byteSalt = PasswordManager.generateSalt();
+            String strSalt = PasswordManager.byteArrayToString(byteSalt);
+
+            //generating password hash
+            String passwordHash = PasswordManager.generatePasswordHash(password, byteSalt);
+
+            //adding user to database
+            User newUser = new User(email, strSalt, passwordHash);
             DBManager.addUser(newUser);
 
             //Shows alert that account was created
