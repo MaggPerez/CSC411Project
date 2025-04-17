@@ -26,36 +26,42 @@ public class SignUpController extends HelloApplication {
         sceneSwitcher("home.fxml");
     }
 
+
     @FXML
     public void createAccount() throws IOException {
-//        String email = emailField.getText();
-//        String password = passwordField.getText();
-//        String confirmPassword = confirmPasswordField.getText();
-//        String salt = "";
-//
-//        User newUser = new User(email, salt, password);
-//        DBManager.addUser(newUser);
-
-
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        //Shows error alert if both fields are empty
-        if(emailField.getText().isEmpty() && passwordField.getText().isEmpty()){
-            alert.setTitle("TextFields are empty");
-            alert.setContentText("Fill in email and password");
-            alert.show();
-        }
-        //Error alert if both password fields are not the same.
-        else if(!passwordField.getText().equals(confirmPasswordField.getText())){
-            alert.setTitle("Error!");
-            alert.setContentText("Passwords are not the same.");
-            alert.show();
-        }
-        else{
-            //adds user's account to DB
-            String email = emailField.getText();
-            String password = passwordField.getText();
-            //Validation here (YOU WILL ADD THIS)
 
+        //getting user info from all TextFields
+        String email = emailField.getText();
+        String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
+
+        //Validating email and password
+        String emailValidation = Validator.validateEmail(email);
+        String passwordValidation = Validator.validatePasswords(password, confirmPassword);
+
+
+        //if email and password validations contain an error, it will be displayed
+        if(!emailValidation.isEmpty() && !passwordValidation.isEmpty()){
+            alert.setTitle("Error");
+            alert.setContentText(emailValidation + "\n" + passwordValidation);
+            alert.show();
+        }
+        //if email validation contains an error, it will be displayed
+        else if(!emailValidation.isEmpty()){
+            alert.setTitle("Error in Email");
+            alert.setContentText(emailValidation);
+            alert.show();
+        }
+        //if password validation contains an error, it will be displayed
+        else if(!passwordValidation.isEmpty()){
+            alert.setTitle("Error in Password");
+            alert.setContentText(passwordValidation);
+            alert.show();
+        }
+
+        //if there are no error messages, the user gets added into database
+        else{
             //generating salt
             byte[] byteSalt = PasswordManager.generateSalt();
             String strSalt = PasswordManager.byteArrayToString(byteSalt);
@@ -63,18 +69,19 @@ public class SignUpController extends HelloApplication {
             //generating password hash
             String passwordHash = PasswordManager.generatePasswordHash(password, byteSalt);
 
-            //adding user to database
+            //adding user to database with salt and password hash
             User newUser = new User(email, strSalt, passwordHash);
             DBManager.addUser(newUser);
 
-            //Shows alert that account was created
+            //displaying alert message that it was a success
             alert.setAlertType(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Success!");
             alert.setContentText("Account created!");
             alert.show();
+
+            //switching to login screen
             switchToLogin();
         }
-
 
     }
 }
