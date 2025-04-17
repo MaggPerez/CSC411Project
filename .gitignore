@@ -36,3 +36,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+#new files
+csc411db.conf
