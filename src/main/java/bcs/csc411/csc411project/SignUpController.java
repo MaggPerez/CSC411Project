@@ -71,7 +71,7 @@ public class SignUpController extends HelloApplication {
 
             //adding user to database with salt and password hash
             User newUser = new User(email, strSalt, passwordHash);
-            DBManager.addUser(newUser);
+//            DBManager.addUser(newUser);
 
             //displaying alert message that it was a success
             alert.setAlertType(Alert.AlertType.CONFIRMATION);

@@ -10,7 +10,7 @@ public class Validator {
             return message = "Email field cannot be empty.";
         }
         //if email passes regular expression test, no message is thrown which means there are no errors
-        else if(email.matches("[A-Za-z0-9#$%&*-]*@[A-Za-z0-9]+[.][a-z]{2,4}")){
+        else if(email.matches("[A-Za-z0-9#$%&*-]+@[A-Za-z0-9]+\\.[a-zA-Z]{2,4}")) {
             return "";
         }
         else{
@@ -42,21 +42,30 @@ public class Validator {
         }
 
         //checking if both password fields are equal
-        if(!password.equals(confirmPassword)){
+        if(!validateConfirmPassword(password, confirmPassword)){
             return message = "Passwords do not match";
         }
 
         //if they are equal, password requirements will occur here.
-        if(password.matches("[A-Za-z\\d-+_!@#$%^&*]{8,}")){
+        if (password.matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[-+_!@#$%^&*]).{8,}")) {
             return "";
         }
         else{
             //if password doesn't meet the requirements, it will return password requirements
             return message = "Password must be at least 8 characters long and \ncontain at least one" +
-                    "lowercase letter, one uppercase letter, \none digit," +
+                    " lowercase letter, one uppercase letter, \none digit," +
                     " and one special character of the following -+_!@#$%^&*";
         }
 
+    }
+
+    public static boolean validateConfirmPassword(String password, String confirmPassword){
+        if(password.equals(confirmPassword)){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 
