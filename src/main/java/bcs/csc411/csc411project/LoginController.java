@@ -31,6 +31,26 @@ public class LoginController extends HelloApplication{
         String email = emailField.getText();
         String enteredPassword = passwordField.getText();
 
+        //Checking to see if email and pas
+        if(email.isEmpty() && enteredPassword.isEmpty()){
+            alert.setTitle("Login Failed");
+            alert.setContentText("Enter email and password");
+            alert.show();
+            return;
+        }
+        else if (email.isEmpty()){
+            alert.setTitle("Login Failed");
+            alert.setContentText("Email is empty");
+            alert.show();
+            return;
+        }
+        else if(enteredPassword.isEmpty()){
+            alert.setTitle("Login Failed");
+            alert.setContentText("Password is empty");
+            alert.show();
+            return;
+        }
+
         //checks if user exists, returns true if found.
         boolean isAuthenticated = PasswordManager.authenticate(email, enteredPassword);
         if(isAuthenticated){

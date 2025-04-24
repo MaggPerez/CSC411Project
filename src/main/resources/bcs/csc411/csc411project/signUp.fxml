@@ -32,5 +32,6 @@
       </VBox>
       <Button mnemonicParsing="false" onAction="#createAccount" text="Sign up" />
       <Button mnemonicParsing="false" onAction="#switchToHome" text="Go back" />
+      <Label text="CSC411 Spring 2025, Magdaleno Perez" />
    </children>
 </VBox>

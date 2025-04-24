@@ -43,7 +43,7 @@ public class Validator {
 
         //checking if both password fields are equal
         if(!validateConfirmPassword(password, confirmPassword)){
-            return message = "Passwords do not match";
+            return message = "Both Password Fields do not match";
         }
 
         //if they are equal, password requirements will occur here.

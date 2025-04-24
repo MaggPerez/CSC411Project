@@ -30,7 +30,11 @@ class ValidatorTest {
     @DisplayName("Validating password to see" +
             "if they both meet the requirements.")
     void validatePasswords() {
-//        assertEquals("");
+
+        //Valid emails
+        assertEquals("", Validator.validatePasswords("G0#Morning", "G0#Morning"));
+
+        assertNotEquals("", Validator.validatePasswords("specialonly!@#", "specialonly!@#"));
 
     }
 
@@ -38,6 +42,8 @@ class ValidatorTest {
     @DisplayName("Validating confirmPassword to see" +
             "if password and confirmPassword match")
     void validateConfirmPassword(){
+        assertTrue(Validator.validateConfirmPassword("Br3@kfast!", "Br3@kfast!"));
 
+        assertNotEquals(true, Validator.validateConfirmPassword("J@v@4Fun", "Net+W0rk5" ));
     }
 }
