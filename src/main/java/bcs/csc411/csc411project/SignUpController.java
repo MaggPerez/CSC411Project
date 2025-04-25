@@ -28,6 +28,9 @@ public class SignUpController extends HelloApplication {
 
 
     @FXML
+    /**
+     * method that signs new users up
+     */
     public void createAccount() throws IOException {
         Alert alert = new Alert(Alert.AlertType.ERROR);
 
@@ -36,7 +39,8 @@ public class SignUpController extends HelloApplication {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-        //Validating email and password
+        //Validating email and password, will return error messages if any are found
+        //otherwise will return an empty string which means there are no errors
         String emailValidation = Validator.validateEmail(email);
         String passwordValidation = Validator.validatePasswords(password, confirmPassword);
 
@@ -44,18 +48,24 @@ public class SignUpController extends HelloApplication {
         //if email and password validations contain an error, it will be displayed
         if(!emailValidation.isEmpty() && !passwordValidation.isEmpty()){
             alert.setTitle("Error");
+
+            //displays error message
             alert.setContentText(emailValidation + "\n" + passwordValidation);
             alert.show();
         }
         //if email validation contains an error, it will be displayed
         else if(!emailValidation.isEmpty()){
             alert.setTitle("Error in Email");
+
+            //displays error message
             alert.setContentText(emailValidation);
             alert.show();
         }
         //if password validation contains an error, it will be displayed
         else if(!passwordValidation.isEmpty()){
             alert.setTitle("Error in Password");
+
+            //displays error message
             alert.setContentText(passwordValidation);
             alert.show();
         }

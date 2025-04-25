@@ -17,10 +17,6 @@ public class HelloApplication extends Application {
     }
 
 
-    public static Stage getPrimaryStage() {
-        return primaryStage;
-    }
-
     public static void setStage(Stage stage){
         primaryStage = stage;
     }
