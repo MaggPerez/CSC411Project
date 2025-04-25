@@ -13,7 +13,6 @@ public class DBManager {
         Connection conn = null;
         try{
             File file = new File("csc411db.conf");
-            //Solves a bug that you have with getting file for csc325
             Scanner infile = new Scanner(file, "utf-8");
             String username = infile.next();
             String password = infile.next();
